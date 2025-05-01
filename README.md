@@ -8,7 +8,7 @@ This application collects, analyzes, and presents information from various autho
 
 ## Data Sources
 
-The application scrapes and analyzes information from numerous sources, including:
+The application scrapes and analyzes information from numerous sources mainly:
 
 - National Artificial Intelligence Initiative Act (NAIIA)
 - National AI Initiative Office (NAIIO)
@@ -56,11 +56,3 @@ pip install -r requirements.txt
    ```bash
    python main.py --serve
    ```
-
-## License
-
-MIT
-
-## Contributors
-
-- Your Name 
