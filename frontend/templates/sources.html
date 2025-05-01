@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sources - AI Policy Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #182848;
+        }
+        .navbar-brand {
+            font-weight: 700;
+        }
+        .nav-link {
+            font-weight: 500;
+        }
+        .page-header {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        footer {
+            background-color: #182848;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        .source-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+            margin-bottom: 1.5rem;
+        }
+        .source-card:hover {
+            transform: translateY(-5px);
+        }
+        .source-card .card-header {
+            border-radius: 10px 10px 0 0;
+            font-weight: 600;
+            background-color: #4b6cb7;
+            color: white;
+        }
+        .category-title {
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #4b6cb7;
+        }
+        .filter-btn {
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">AI Policy Analyzer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/sources">Sources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/analysis">Analysis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/compare">Compare</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold">Data Sources</h1>
+                    <p class="lead">Explore the comprehensive collection of AI policies and frameworks analyzed in this project.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Filter Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="mb-3">Filter by Category</h5>
+                        <div>
+                            <button class="btn btn-outline-primary filter-btn active" data-filter="all">All</button>
+                            <button class="btn btn-outline-primary filter-btn" data-filter="us-government">US Government</button>
+                            <button class="btn btn-outline-primary filter-btn" data-filter="international-org">International Organizations</button>
+                            <button class="btn btn-outline-primary filter-btn" data-filter="academic">Academic & Research</button>
+                            <button class="btn btn-outline-primary filter-btn" data-filter="industry">Industry & Consortia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- US Government Sources -->
+        <div class="category-section" id="us-government">
+            <h2 class="category-title">US Government Initiatives</h2>
+            <div class="row">
+                {% for source in sources %}
+                    {% if source.id in ['naiia', 'naiio', 'nairrtf', 'nitrd', 'nist', 'nsf_ai', 'doe_aito', 'ostp', 'nscai', 'jaic'] %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card source-card">
+                                <div class="card-header">
+                                    {{ source.name }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ source.name }} is a key component of the U.S. government's AI strategy.</p>
+                                    <a href="{{ source.url }}" class="btn btn-sm btn-primary" target="_blank">
+                                        <i class="fas fa-external-link-alt me-1"></i> Visit Official Site
+                                    </a>
+                                    <a href="/compare?sources={{ source.id }}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-chart-bar me-1"></i> View Analysis
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- International Organizations -->
+        <div class="category-section" id="international-org">
+            <h2 class="category-title">International Organizations</h2>
+            <div class="row">
+                {% for source in sources %}
+                    {% if source.id in ['oecd_aipo', 'gpai', 'unesco_aiethics', 'eu_ai_act', 'wef_ai', 'wipo', 'un_ai', 'itu_ai', 'cahai', 'ircai', 'unu_ai', 'imf_ai', 'wb_dite', 'undp_ai', 'asean_ai'] %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card source-card">
+                                <div class="card-header">
+                                    {{ source.name }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">International initiative providing framework and guidance for AI governance.</p>
+                                    <a href="{{ source.url }}" class="btn btn-sm btn-primary" target="_blank">
+                                        <i class="fas fa-external-link-alt me-1"></i> Visit Official Site
+                                    </a>
+                                    <a href="/compare?sources={{ source.id }}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-chart-bar me-1"></i> View Analysis
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Academic & Research -->
+        <div class="category-section" id="academic">
+            <h2 class="category-title">Academic & Research Institutions</h2>
+            <div class="row">
+                {% for source in sources %}
+                    {% if source.id in ['stanford_hai', 'aaai', 'ai100', 'mit_csail', 'mila', 'ellis', 'sail', 'kaust_ai', 'iiim', 'claire'] %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card source-card">
+                                <div class="card-header">
+                                    {{ source.name }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Academic and research center studying AI policy, ethics, and governance.</p>
+                                    <a href="{{ source.url }}" class="btn btn-sm btn-primary" target="_blank">
+                                        <i class="fas fa-external-link-alt me-1"></i> Visit Official Site
+                                    </a>
+                                    <a href="/compare?sources={{ source.id }}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-chart-bar me-1"></i> View Analysis
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Industry & Consortia -->
+        <div class="category-section" id="industry">
+            <h2 class="category-title">Industry & Consortia</h2>
+            <div class="row">
+                {% for source in sources %}
+                    {% if source.id in ['ieee_ecai', 'cdei', 'jaii', 'ukaic', 'cnas_ai', 'dti_ai', 'gaia', 'aiaaic', 'aisc', 'mckinsey_gi', 'statista_ai'] %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card source-card">
+                                <div class="card-header">
+                                    {{ source.name }}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Industry-led initiative or consortium focused on responsible AI development.</p>
+                                    <a href="{{ source.url }}" class="btn btn-sm btn-primary" target="_blank">
+                                        <i class="fas fa-external-link-alt me-1"></i> Visit Official Site
+                                    </a>
+                                    <a href="/compare?sources={{ source.id }}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-chart-bar me-1"></i> View Analysis
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>AI Policy Analyzer</h5>
+                    <p>A tool for analyzing and comparing artificial intelligence policies and frameworks.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-white">Home</a></li>
+                        <li><a href="/overview" class="text-white">Overview</a></li>
+                        <li><a href="/sources" class="text-white">Sources</a></li>
+                        <li><a href="/analysis" class="text-white">Analysis</a></li>
+                        <li><a href="/compare" class="text-white">Compare</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.ai.gov/" class="text-white" target="_blank">NAIIO</a></li>
+                        <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" class="text-white" target="_blank">NIST AI Framework</a></li>
+                        <li><a href="https://oecd.ai/" class="text-white" target="_blank">OECD AI Observatory</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4 bg-light">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2023 AI Policy Analyzer. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const categorySections = document.querySelectorAll('.category-section');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Show/hide sections based on filter
+                    if (filter === 'all') {
+                        categorySections.forEach(section => section.style.display = 'block');
+                    } else {
+                        categorySections.forEach(section => {
+                            if (section.id === filter) {
+                                section.style.display = 'block';
+                            } else {
+                                section.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
