@@ -101,11 +101,3 @@ python main.py --all
 1. Create a new analysis module in `/analysis/`
 2. Implement the analysis logic
 3. Update the `analyze_all_data()` function in `/analysis/__init__.py` to include your new analysis
-
-## License
-
-MIT
-
-## Contributors
-
-- Your Name
