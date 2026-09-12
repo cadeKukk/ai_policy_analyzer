@@ -2,6 +2,22 @@
 
 A web scraping and analysis application focused on evaluating the National Artificial Intelligence Initiative Act (NAIIA) and related AI governance frameworks worldwide.
 
+## Sample-data preview
+
+![AI Policy Analyzer overview running the bundled demo](docs/screenshots/overview.png)
+
+The screenshot shows `/overview` with the sample data from [run_demo.py](run_demo.py), captured on 2026-09-12. The bundled text and numbers are demonstration content, not results from a fresh scrape.
+
+After installing Flask, run the demo from the repository root:
+
+```sh
+python run_demo.py
+```
+
+Open `http://localhost:5000/overview` or inspect `http://localhost:5000/api/results`. The script writes its fixtures into `data/raw` and `data/processed`, replacing files with the same names. Use a fresh clone if you already have collected data.
+
+The current checkout includes templates for Home, Overview, and Sources. The Analysis and Compare routes refer to templates that are not present.
+
 ## Project Overview
 
 This application collects, analyzes, and presents information from various authoritative sources on AI policy, with a special focus on the National Artificial Intelligence Initiative Act and its implementation. The tool helps researchers, policymakers, and interested individuals understand the global AI governance landscape.
