@@ -88,7 +88,6 @@ Running `python main.py` with no flags is the same as `--all`. Each run also wri
 
 - `--analyze` (and so `--all` and a bare `python main.py`) stops with `ModuleNotFoundError: No module named 'analysis.visualization'`: [`analysis/__init__.py`](analysis/__init__.py) imports `generate_visualizations` from the analysis package, but it lives in [`frontend/visualization.py`](frontend/visualization.py).
 - `analyze_all_data()` runs network analysis before comparative analysis, so network analysis uses the similarity scores from the previous run (none on the first run).
-- `/api/visualizations` returns `null`, because `generate_visualizations()` builds its result but doesn't return it.
 - The Analysis and Compare pages (`/analysis`, `/compare`) return a 500 error: their templates (`analysis.html`, `compare.html`) are not in `frontend/templates/`.
 
 ## Project structure
