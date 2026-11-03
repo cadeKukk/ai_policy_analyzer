@@ -9,7 +9,7 @@ def analyze_all_data():
     from .text_analysis import analyze_text_data
     from .network_analysis import analyze_network
     from .comparative_analysis import run_comparative_analysis
-    from .visualization import generate_visualizations
+    from frontend.visualization import generate_visualizations
     
     logger.info("Starting comprehensive data analysis")
     
@@ -21,16 +21,20 @@ def analyze_all_data():
     text_results = analyze_text_data()
     logger.info("Completed text analysis")
     
-    # Analyze relationships between organizations and policies
-    network_results = analyze_network()
-    logger.info("Completed network analysis")
-    
     # Run comparative analysis across sources
     comparative_results = run_comparative_analysis()
     logger.info("Completed comparative analysis")
     
+    # Analyze relationships between organizations and policies
+    # (reads the similarity scores the comparative analysis just saved)
+    network_results = analyze_network()
+    logger.info("Completed network analysis")
+    
     # Generate visualizations
-    visualization_results = generate_visualizations()
+    visualization_results = generate_visualizations({
+        "text_analysis": text_results,
+        "comparative_analysis": comparative_results
+    })
     logger.info("Completed visualization generation")
     
     # Return summary of all analysis results
