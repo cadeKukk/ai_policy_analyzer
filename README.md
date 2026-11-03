@@ -65,13 +65,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-The versions pinned in `requirements.txt` date from 2023 and don't install on Python 3.13 or newer (pandas 2.1.3 has no wheels there). On a current Python, install the packages the code imports instead:
-
-```bash
-pip install flask requests beautifulsoup4 pandas scikit-learn nltk
-```
-
-That set was checked with Python 3.14 on 2026-11-03: the demo serves its pages, and the analysis stage runs on the sample data once the first issue under [Known issues](#known-issues) is fixed.
+`requirements.txt` lists the packages the code imports, with minimum versions. Checked with Python 3.14 on 2026-11-03: the demo serves its pages and `python main.py --analyze` runs on the sample data.
 
 ## Usage
 
@@ -86,8 +80,6 @@ Running `python main.py` with no flags is the same as `--all`. Each run also wri
 
 ## Known issues
 
-- `--analyze` (and so `--all` and a bare `python main.py`) stops with `ModuleNotFoundError: No module named 'analysis.visualization'`: [`analysis/__init__.py`](analysis/__init__.py) imports `generate_visualizations` from the analysis package, but it lives in [`frontend/visualization.py`](frontend/visualization.py).
-- `analyze_all_data()` runs network analysis before comparative analysis, so network analysis uses the similarity scores from the previous run (none on the first run).
 - The Analysis and Compare pages (`/analysis`, `/compare`) return a 500 error: their templates (`analysis.html`, `compare.html`) are not in `frontend/templates/`.
 
 ## Project structure
