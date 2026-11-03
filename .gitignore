@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Created at runtime by main.py and run_demo.py
+data/
+logs_*.log
+*.log
+
+# Manim renders
+media/
+
+# macOS
+.DS_Store
